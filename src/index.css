@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@theme {
+  --color-accent: #e0f200;
+  --color-bg: #080808;
+  --font-display: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@layer base {
+  body {
+    @apply bg-bg text-white font-display overflow-hidden cursor-crosshair;
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+  }
+}
+
+@keyframes flash {
+  0% { opacity: 0.3; }
+  50% { opacity: 0; }
+  100% { opacity: 0.3; }
+}
+
+.animate-flash {
+  animation: flash 0.15s steps(2) infinite;
+}

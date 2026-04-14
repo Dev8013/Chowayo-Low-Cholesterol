@@ -1,0 +1,6 @@
+{
+  "name": "Impact Visualizer",
+  "description": "A full-screen interactive visualizer that triggers a visual impact on click.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}
