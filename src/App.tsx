@@ -4,7 +4,7 @@
  */
 
 import React, { useState, useRef, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import { motion } from 'motion/react';
 
 export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -85,18 +85,6 @@ export default function App() {
 
       {/* Frame Overlay */}
       <div className="absolute inset-[40px] border-x border-white/10 pointer-events-none z-20" />
-
-      {/* Visual Glitch Overlay */}
-      <AnimatePresence>
-        {isPlaying && (
-          <motion.div 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 0.3 }}
-            exit={{ opacity: 0 }}
-            className="absolute inset-0 bg-accent mix-blend-overlay pointer-events-none animate-flash z-40"
-          />
-        )}
-      </AnimatePresence>
 
       {/* Status Bar */}
       <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 flex gap-10 text-[10px] uppercase tracking-widest opacity-50 z-30">
