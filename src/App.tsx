@@ -10,14 +10,24 @@ export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoError, setVideoError] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const audioRef = useRef<HTMLAudioElement>(null);
 
   // Using a more reliable sample video URL
   const videoSrc = '/video.mp4';
+  const audioSrc = '/sound.mp3';
   const gifFallback = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxx6fG9S01G/giphy.gif';
 
   const handleTrigger = (e: React.MouseEvent) => {
     if (e.button === 0 && !isPlaying) {
       setIsPlaying(true);
+      
+      // Play Audio
+      if (audioRef.current) {
+        audioRef.current.currentTime = 0;
+        audioRef.current.play().catch(err => console.error("Audio play failed:", err));
+      }
+
+      // Play Video
       if (videoRef.current) {
         videoRef.current.currentTime = 0;
         const playPromise = videoRef.current.play();
@@ -92,6 +102,9 @@ export default function App() {
         <span>Status: {isPlaying ? 'Active' : 'Ready'}</span>
         <span>Frame: {isPlaying ? '001/600' : '000/000'}</span>
       </div>
+
+      {/* Hidden Audio Element */}
+      <audio ref={audioRef} src={audioSrc} preload="auto" />
     </div>
   );
 }
