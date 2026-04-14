@@ -46,6 +46,9 @@ export default function App() {
 
   const onVideoEnd = () => {
     setIsPlaying(false);
+    if (videoRef.current) {
+      videoRef.current.currentTime = 0;
+    }
   };
 
   return (
@@ -62,8 +65,7 @@ export default function App() {
             onEnded={onVideoEnd}
             playsInline
             muted
-            autoPlay
-            loop
+            preload="auto"
             onError={() => {
               console.error("Video element error, switching to GIF fallback");
               setVideoError(true);
