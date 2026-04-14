@@ -16,7 +16,7 @@ export default function App() {
   const videoSrc = '/video.mp4';
   const audioSrc = '/sound.mp3';
   const audioFallback = 'https://assets.mixkit.co/sfx/preview/mixkit-simple-click-select-1879.mp3';
-  const gifFallback = 'https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxx6fG9S01G/giphy.gif';
+  const gifFallback = 'https://media3.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJqZ3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6Z3R6JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/3o7TKMGpxx6fG9S01G/giphy.gif';
 
   const handleTrigger = (e: React.MouseEvent) => {
     if (e.button === 0 && !isPlaying) {
