@@ -84,16 +84,6 @@ export default function App() {
       {/* Frame Overlay */}
       <div className="absolute inset-[40px] border-x border-white/10 pointer-events-none z-20" />
 
-      {/* Placeholder UI Text */}
-      <div className={`absolute z-30 text-center pointer-events-none transition-opacity duration-300 ${isPlaying ? 'opacity-10' : 'opacity-80'}`}>
-        <h1 className="text-[8rem] font-black tracking-tighter leading-[0.8] uppercase mb-5 drop-shadow-2xl">
-          IMPACT
-        </h1>
-        <p className="text-[0.8rem] tracking-[0.4em] uppercase text-accent drop-shadow-md">
-          Left Click to Trigger
-        </p>
-      </div>
-
       {/* Visual Glitch Overlay */}
       <AnimatePresence>
         {isPlaying && (
