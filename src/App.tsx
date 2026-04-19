@@ -16,6 +16,7 @@ export default function App() {
   const videoSrc = '/video.mp4';
   const audioSrc = '/sound.mp3';
   const audioFallback = 'https://assets.mixkit.co/sfx/preview/mixkit-simple-click-select-1879.mp3';
+  const videoFallback = 'https://assets.mixkit.co/video/preview/mixkit-star-field-in-deep-space-34356-large.mp4';
   const gifFallback = 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop';
 
   const handleTrigger = (e: React.MouseEvent) => {
@@ -80,9 +81,9 @@ export default function App() {
             onEnded={onVideoEnd}
             playsInline
             muted
+            crossOrigin="anonymous"
             autoPlay={false}
-            preload="metadata"
-            src={videoSrc}
+            preload="auto"
             onError={(e) => {
               const video = e.currentTarget;
               const err = video.error;
@@ -97,9 +98,14 @@ export default function App() {
               }
               setErrorDetail(msg);
               console.error("Video element error:", msg, err);
-              setVideoError(true);
+              // Only trigger fallback UI if the main source fails
+              if (video.currentSrc.includes('video.mp4')) {
+                setVideoError(true);
+              }
             }}
           >
+            <source src={videoSrc} type="video/mp4" />
+            <source src={videoFallback} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (
