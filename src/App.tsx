@@ -5,16 +5,16 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
+import videoSrc from './assets/video.mp4';
+import audioSrc from './assets/sound.mp3';
 
 export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [videoError, setVideoError] = useState(false);
+  const [errorDetail, setErrorDetail] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
-  // Using a more reliable sample video URL
-  const videoSrc = '/video.mp4';
-  const audioSrc = '/sound.mp3';
   const audioFallback = 'https://assets.mixkit.co/sfx/preview/mixkit-simple-click-select-1879.mp3';
   const gifFallback = 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop';
 
@@ -83,8 +83,18 @@ export default function App() {
             preload="auto"
             onError={(e) => {
               const video = e.currentTarget;
-              console.error("Video element error:", video.error);
-              console.error("Attempted src:", videoSrc);
+              const err = video.error;
+              let msg = 'Unknown Error';
+              if (err) {
+                switch (err.code) {
+                  case 1: msg = 'Aborted'; break;
+                  case 2: msg = 'Network Error'; break;
+                  case 3: msg = 'Decode Error'; break;
+                  case 4: msg = 'Source Not Supported'; break;
+                }
+              }
+              setErrorDetail(msg);
+              console.error("Video element error:", msg, err);
               setVideoError(true);
             }}
           >
@@ -104,10 +114,17 @@ export default function App() {
       <div className="absolute inset-[40px] border-x border-white/10 pointer-events-none z-20" />
 
       {/* Status Bar */}
-      <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 flex gap-10 text-[10px] uppercase tracking-widest opacity-50 z-30">
-        <span>Ref: X-9021</span>
-        <span>Status: {isPlaying ? 'Active' : 'Ready'}</span>
-        <span>Frame: {isPlaying ? '001/600' : '000/000'}</span>
+      <div className="absolute bottom-[30px] left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 z-30">
+        <div className="flex gap-10 text-[10px] uppercase tracking-widest opacity-50">
+          <span>Ref: X-9021</span>
+          <span>Status: {isPlaying ? 'Active' : 'Ready'}</span>
+          <span>Frame: {isPlaying ? '001/600' : '000/000'}</span>
+        </div>
+        {videoError && (
+          <div className="text-[8px] text-red-500 uppercase tracking-tighter opacity-80">
+            Playback Error: {errorDetail || 'Check Assets'}
+          </div>
+        )}
       </div>
 
       {/* Hidden Audio Element */}
