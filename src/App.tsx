@@ -5,8 +5,6 @@
 
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'motion/react';
-import videoSrc from './assets/video.mp4';
-import audioSrc from './assets/sound.mp3';
 
 export default function App() {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -15,6 +13,8 @@ export default function App() {
   const videoRef = useRef<HTMLVideoElement>(null);
   const audioRef = useRef<HTMLAudioElement>(null);
 
+  const videoSrc = '/video.mp4';
+  const audioSrc = '/sound.mp3';
   const audioFallback = 'https://assets.mixkit.co/sfx/preview/mixkit-simple-click-select-1879.mp3';
   const gifFallback = 'https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?q=80&w=2071&auto=format&fit=crop';
 
@@ -80,7 +80,9 @@ export default function App() {
             onEnded={onVideoEnd}
             playsInline
             muted
-            preload="auto"
+            autoPlay={false}
+            preload="metadata"
+            src={videoSrc}
             onError={(e) => {
               const video = e.currentTarget;
               const err = video.error;
@@ -98,7 +100,6 @@ export default function App() {
               setVideoError(true);
             }}
           >
-            <source src={videoSrc} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         ) : (

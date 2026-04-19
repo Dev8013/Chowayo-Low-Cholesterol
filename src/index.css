@@ -9,7 +9,7 @@
 @layer base {
   body {
     @apply bg-bg text-white font-display overflow-hidden;
-    cursor: url('./assets/mousePointer.png') 16 16, crosshair;
+    cursor: url('/mousePointer.png') 16 16, crosshair;
     margin: 0;
     padding: 0;
     width: 100vw;
