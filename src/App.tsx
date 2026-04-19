@@ -81,8 +81,10 @@ export default function App() {
             playsInline
             muted
             preload="auto"
-            onError={() => {
-              console.error("Video element error, switching to GIF fallback");
+            onError={(e) => {
+              const video = e.currentTarget;
+              console.error("Video element error:", video.error);
+              console.error("Attempted src:", videoSrc);
               setVideoError(true);
             }}
           >
