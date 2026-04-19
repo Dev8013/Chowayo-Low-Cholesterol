@@ -65,6 +65,17 @@ You can easily modify the theme and colors in `src/index.css`:
 }
 ```
 
+## ⚠️ Troubleshooting "Content Not Available"
+
+If you see a placeholder image or a "Content Not Available" message, it means your media files (`video.mp4`, `sound.mp3`) are either missing or are **0 bytes (empty)**.
+
+**To fix this:**
+1.  **Replace the empty files**: Upload your real `video.mp4` and `sound.mp3` to the `public/` directory.
+2.  **Verify file size**: Ensure the files are not empty in your local project or GitHub repository.
+3.  **Redeploy**: Commit the changes and push to GitHub/Vercel.
+
+The application automatically switches to a fallback image if it detects that the video file is broken or empty.
+
 ## 📄 License
 
 This project is licensed under the Apache-2.0 License. See the [LICENSE](LICENSE) file for details.
