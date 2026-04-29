@@ -1,0 +1,1 @@
+// This is a type declaration file for the Chowayo Low Cholesterol project.
